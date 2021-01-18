@@ -71,6 +71,9 @@ repositories {
         mavenCentral()
     }
     jcenter()
+	maven {
+        url "https://niton.jfrog.io/artifactory/java-libs/"
+    }
 }
 
 if (isApplication) {
