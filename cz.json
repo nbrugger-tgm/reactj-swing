@@ -2,6 +2,8 @@
     "commitizen": {
         "name": "cz_conventional_commits",
         "version": "0.0.0",
+		"tag_format": "v$minor.$major.$patch-$prerelease",
+		"update_changelog_on_bump": true,
         "version_files": [
         	"build.gradle:version"
         ],
