@@ -14,8 +14,8 @@ ReactJ : [Repo](https://github.com/nbrugger-tgm/reactj) [Wiki](https://github.co
 Changelog : [Changelog.md](Changelog.md)
 
 ### Usage
-
-Version: [![Maven metadata URL](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Fniton.jfrog.io%2Fartifactory%2Fjava-libs%2Fcom%2Fniton%2Freactj%2reactj-swing%2Fmaven-metadata.xml)](https://niton.jfrog.io/ui/packages/gav:%2F%2Fcom.niton.reactj:swing?name=reactj-swing&type=packages)
+com/niton/reactj/swing/maven-metadata.xml
+Version: [![Maven metadata URL](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Fniton.jfrog.io%2Fartifactory%2Fjava-libs%2Fcom%2Fniton%2Freactj%2swing%2Fmaven-metadata.xml)](https://niton.jfrog.io/ui/packages/gav:%2F%2Fcom.niton.reactj:swing?name=reactj-swing&type=packages)
 
 #### Gradle
 
