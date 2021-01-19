@@ -10,8 +10,10 @@
     This libary is an extension to <b><a>ReactJ</a></b> that adds a swing specific implementation.
 Its just like <b>Vue js</b> for java/swing
 </p>
+
 ReactJ : [Repo](https://github.com/nbrugger-tgm/reactj) [Wiki](https://github.com/nbrugger-tgm/reactj/wiki)
-Changelog : [Changelog.md](Changelog.md)
+
+Changelog : [Changelog.md](CHANGELOG.md)
 
 ### Usage
 
