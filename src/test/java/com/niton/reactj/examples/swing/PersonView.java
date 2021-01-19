@@ -5,18 +5,21 @@ import com.niton.reactj.ReactiveProxy;
 import com.niton.reactj.mvc.EventManager;
 import com.niton.reactj.mvc.ReactiveView;
 import com.niton.reactj.annotation.Reactive;
+import com.niton.reactj.swing.JRComponent;
+import com.niton.reactj.swing.components.JRComboBox;
+import com.niton.reactj.swing.components.JRTextField;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class PersonView extends ReactiveView< JPanel, ReactiveProxy<Person>> {
+public class PersonView extends JRComponent<ReactiveProxy<Person>> {
 
 	private JPanel panel;
 
-	private JTextField        surnameInput;
-	private JTextField        ageInput;
-	private JTextField        iqField;
-	private JComboBox<Gender> genderJComboBox;
+	private JRTextField        surnameInput;
+	private JRTextField        ageInput;
+	private JRTextField        iqField;
+	private JRComboBox<Gender> genderJComboBox;
 	private JButton           selectButton;
 	public final EventManager<Person> resetEvent = new EventManager<>();
 
@@ -24,24 +27,21 @@ public class PersonView extends ReactiveView< JPanel, ReactiveProxy<Person>> {
 	@Override
 	protected JPanel createView() {
 		panel = new JPanel();
-		surnameInput = new JTextField();
-		ageInput = new JTextField();
-		iqField = new JTextField();
-		genderJComboBox = new JComboBox<>(Gender.values());
+		surnameInput = new JRTextField();
+		ageInput = new JRTextField();
+		iqField = new JRTextField();
+		genderJComboBox = new JRComboBox<>();
+		genderJComboBox.setModel(new DefaultComboBoxModel<>(Gender.values()));
 		selectButton = new JButton("Reset");
 
-
-		panel.add(surnameInput);
 		surnameInput.setColumns(10);
-
-		panel.add(ageInput);
 		ageInput.setColumns(10);
-
-		panel.add(iqField);
 		iqField.setColumns(10);
 
+		panel.add(surnameInput);
+		panel.add(ageInput);
+		panel.add(iqField);
 		panel.add(genderJComboBox);
-
 		panel.add(selectButton);
 
 		return panel;
@@ -49,30 +49,26 @@ public class PersonView extends ReactiveView< JPanel, ReactiveProxy<Person>> {
 
 	@Override
 	public void createBindings(ReactiveBinder binder) {
-		binder.bindBi("surename", surnameInput::setText, surnameInput::getText);
-		surnameInput.getDocument().addUndoableEditListener(binder::react);
-		//surnameInput.addActionListener(bindings::react);
+		surnameInput.biBindText("surename", binder);
 
 		//bind with value conversion
 		//UI cannot change IQ
-		binder.bind("iq", iqField::setText, String::valueOf);
+		iqField.bindText("iq",String::valueOf,binder);
 
-		binder.bindBi("gender", genderJComboBox::setSelectedItem, genderJComboBox::getSelectedItem);
-		genderJComboBox.addActionListener(binder::react);
+		genderJComboBox.biBindSelectedItem("gender",binder);
 
 
 		//react to changes in many and different ways
 		binder.bind("gender", this::adaptColorToGender);
 
 		//bidirectional binding (With value conversion)
-		binder.bindBi("age", ageInput::setText, ageInput::getText, Integer::parseInt, String::valueOf);
+		ageInput.biBindText("age", String::valueOf, Integer::parseInt,binder);
 		ageInput.addActionListener(binder::react);
 	}
 
 
 	public void adaptColorToGender(Gender g) {
 		panel.setBackground(g == Gender.MALE ? Color.BLUE : (g == Gender.FEMALE ? Color.PINK : Color.WHITE));
-		//repaint();
 	}
 
 	@Override
