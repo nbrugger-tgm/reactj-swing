@@ -64,12 +64,13 @@ Adding the dependency
 Create a View
 
 ```java
-public class DataView extends ReactiveView<DataController, JPanel, ReactiveModel<Data>> {
+public class DataView extends JRComponent<ReactiveProxy<Data>> {
     private JPanel            panel;
     
-    private JTextField        nameInput;
-    private JComboBox<Gender> genderJComboBox;
-    private JButton           selectButton ;
+    //The R marks reactive components
+    private JRTextField        nameInput;
+    private JRComboBox<Gender> genderJComboBox;
+    private JRButton           selectButton ;
     
     public DataView(DataController controller) {
         super(controller);
@@ -79,9 +80,10 @@ public class DataView extends ReactiveView<DataController, JPanel, ReactiveModel
     protected JPanel createView() {
         panel           = new JPanel();
         
-        nameInput       = new JTextField();
-        genderJComboBox = new JComboBox<>(Gender.values());
-        selectButton    = new JButton("Reset");
+        nameInput       = new JRTextField();
+        genderJComboBox = new JRComboBox<>();
+        selectButton    = new JRButton("Reset");
+        genderJComboBox.setModel(new DefaultComboBoxModel<>(Gender.values()));
         
         nameInput.setColumns(10);
         
@@ -94,17 +96,8 @@ public class DataView extends ReactiveView<DataController, JPanel, ReactiveModel
     
     @Override
     public void createBindings(ReactiveBinder bindings) {
-        bindings.bindBi("name", nameInput::setText, nameInput::getText);
-        bindings.bindBi("gender", genderJComboBox::setSelectedItem, genderJComboBox::getSelectedItem);
-        
-        //add actions to react to
-        nameInput.getDocument().addUndoableEditListener(bindings::react);
-        genderJComboBox.addActionListener(bindings::react);
-    }
-    
-    @Override
-    public void registerListeners(PersonController controller) {
-        selectButton.addActionListener(controller::reset);
+        nameInput.biBindText("name", binder);
+        genderJComboBox.biBindSelectedItem("gender",binder);
     }
 }
 ```
@@ -137,7 +130,6 @@ Now we need to bind the view to a Person object
 ```java
 ReactiveProxy<Data> proxy = ReactiveObject.create(Data.class);
 Data model = proxy.object;
-DataController controller = new DataController(model);
 DataView view = new DataView();
 view.setData(proxy);
 
