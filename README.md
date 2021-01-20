@@ -32,7 +32,7 @@ repositories {
 Adding the dependency
 
 ```groovy
-implementation 'com.niton.reactj:swing:0.1.0-SNAPSHOT'
+implementation 'com.niton.reactj:swing:0.1.1'
 ```
 
 #### Maven
@@ -53,7 +53,7 @@ Adding the dependency
 <dependency>
   <groupId>com.niton.reactj</groupId>
   <artifactId>swing</artifactId>
-  <version>0.1.0-SNAPSHOT</version>
+  <version>0.1.1</version>
 </dependency>
 ```
 
