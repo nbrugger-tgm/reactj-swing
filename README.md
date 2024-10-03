@@ -15,6 +15,9 @@ ReactJ : [Repo](https://github.com/nbrugger-tgm/reactj) [Wiki](https://github.co
 
 Changelog : [Changelog.md](CHANGELOG.md)
 
+# SUNSET
+Together with the parent project ReactJ this is sunsetting. This project was intended to learn how to publish a project keep a project clean and publishing it. Its usefullness is limited and will not be updated any longer
+
 ### Usage
 
 Version: [![Maven metadata URL](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Fniton.jfrog.io%2Fartifactory%2Fjava-libs%2Fcom%2Fniton%2Freactj%2Fswing%2Fmaven-metadata.xml)](https://niton.jfrog.io/ui/packages/gav:%2F%2Fcom.niton.reactj:swing?name=reactj-swing&type=packages)
